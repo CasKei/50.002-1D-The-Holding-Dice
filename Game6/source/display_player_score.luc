@@ -27,7 +27,7 @@ module display_player_score (
       8h6: seg_display.values = {4h0,4h6};
       8h7: seg_display.values = {4h0,4h7};
       8h8: seg_display.values = {4h0,4h8};
-      8h9: seg_display.values = {h0,4h9};
+      8h9: seg_display.values = {4h0,4h9};
       8hA: seg_display.values = {4h1,4h0}; //10
       8hB: seg_display.values = {4h1,4h1};
       8hC: seg_display.values = {4h1,4h2};
