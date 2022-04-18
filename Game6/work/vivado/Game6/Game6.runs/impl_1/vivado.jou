@@ -2,12 +2,12 @@
 # Vivado v2021.2.1 (64-bit)
 # SW Build 3414424 on Sun Dec 19 10:57:22 MST 2021
 # IP Build 3405791 on Sun Dec 19 15:54:35 MST 2021
-# Start of session at: Mon Apr 18 12:02:32 2022
-# Process ID: 32956
-# Current directory: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.runs/impl_1
+# Start of session at: Mon Apr 18 23:12:24 2022
+# Process ID: 37096
+# Current directory: C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.runs/impl_1
 # Command line: vivado.exe -log au_top_0.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source au_top_0.tcl -notrace
-# Log file: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.runs/impl_1/au_top_0.vdi
-# Journal file: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.runs/impl_1\vivado.jou
+# Log file: C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.runs/impl_1/au_top_0.vdi
+# Journal file: C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.runs/impl_1\vivado.jou
 # Running On: KC-LAPTOP, OS: Windows, CPU Frequency: 2304 MHz, CPU Physical cores: 4, Host memory: 16922 MB
 #-----------------------------------------------------------
 source au_top_0.tcl -notrace

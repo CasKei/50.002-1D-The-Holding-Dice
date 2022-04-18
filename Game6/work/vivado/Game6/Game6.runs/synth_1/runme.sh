@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.runs/synth_1'
+HD_PWD='C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

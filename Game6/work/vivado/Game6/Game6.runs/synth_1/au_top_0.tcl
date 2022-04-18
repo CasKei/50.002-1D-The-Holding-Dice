@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.runs/synth_1/au_top_0.tcl"
+  variable script "C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.runs/synth_1/au_top_0.tcl"
   variable category "vivado_synth"
 }
 
@@ -76,37 +76,37 @@ create_project -in_memory -part xc7a35tftg256-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.cache/wt [current_project]
-set_property parent.project_path C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.xpr [current_project]
+set_property webtalk.parent_dir C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.cache/wt [current_project]
+set_property parent.project_path C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/adder_16_16.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/alu_16_9.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/boolean_16_17.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/button_conditioner_3.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/compare_16_19.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/counter_14.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/counter_20.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/decoder_22.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/dice_8.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/dice_seg_5.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/display_player_score_6.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/edge_detector_13.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/edge_detector_2.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/game_CU_10.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/gamebeta_4.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/multi_seven_seg_12.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/pipeline_7.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/pn_gen_15.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/regfile_11.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/reset_conditioner_1.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/seven_seg_21.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/shifter_16_18.v
-  C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/au_top_0.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/adder_16_16.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/alu_16_9.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/boolean_16_17.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/button_conditioner_3.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/compare_16_19.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/counter_14.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/counter_20.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/decoder_22.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/dice_8.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/dice_seg_5.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/display_player_score_6.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/edge_detector_13.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/edge_detector_2.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/game_CU_10.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/gamebeta_4.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/multi_seven_seg_12.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/pipeline_7.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/pn_gen_15.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/regfile_11.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/reset_conditioner_1.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/seven_seg_21.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/shifter_16_18.v
+  C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/vivado/Game6/Game6.srcs/sources_1/imports/verilog/au_top_0.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -117,11 +117,11 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/constraint/custom.xdc
-set_property used_in_implementation false [get_files C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/constraint/custom.xdc]
-
 read_xdc C:/Users/cassi/Downloads/Apps/library/components/au.xdc
 set_property used_in_implementation false [get_files C:/Users/cassi/Downloads/Apps/library/components/au.xdc]
+
+read_xdc C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/constraint/custom.xdc
+set_property used_in_implementation false [get_files C:/Users/cassi/Workspace/repostorage/50.002-1D-The-Holding-Dice/Game6/work/constraint/custom.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
