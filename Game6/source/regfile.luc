@@ -33,11 +33,8 @@ module regfile (
     }
   }
       
-  
-
   always {    
-  
-    
+    // write data to registers
     if(we){
       case(wa){
         b0000: st_p1curr.d = data;
@@ -50,8 +47,7 @@ module regfile (
         b0111: temp.d = data;
       }
     }
-    
-    
+    // read a
     case(read_a){
         b0000: data_a = st_p1curr.q;
         b0001: data_a = st_p1acc.q;
@@ -63,8 +59,7 @@ module regfile (
         b0111: data_a = temp.q;
         default: data_a = 0;
     }
-    
-    
+    // read b
     case(read_b){
         b0000: data_b = st_p1curr.q;
         b0001: data_b = st_p1acc.q;
@@ -77,8 +72,7 @@ module regfile (
         default: data_b = 0;
     }
     
-    
-    
+    // outputs from registers
     pturn = st_turn.q;
     pwin = st_win.q;
     p1current = st_p1curr.q;
@@ -86,7 +80,5 @@ module regfile (
     p2current = st_p2curr.q;
     p2accu = st_p2acc.q;
     currentdice = st_currdice.q;
-    
-    
   }
 }
