@@ -1,0 +1,40 @@
+module shifter_16 (
+    // note: only 4 bits of b input.
+    input a[16],                            // input 1
+    input b[16],                            // input 2 but limit to 4 bits
+    input alufn[6],                         // alufn signal
+    input sim_error[1],                     // io_dip[0][6] messes up the output (here it adds one when it isn't supposed to))
+    output out[16]                          // shifted value
+  ) {
+
+  always {
+    case(alufn[1:0]){
+      default : out = a;                    // no shift
+      b00 : 
+        if (sim_error == 0) {
+          out = a << b[3:0];                // SHL
+        } else {
+          out = a << b[3:0] + 1;            // ERROR
+        }
+      b10 : 
+        if (sim_error == 0) {
+          out = $signed(a) <<< b[3:0];      // force signed and SLA
+        } else {
+          out = $signed(a) <<< b[3:0] + 1;  // ERROR
+        }
+      b01 : 
+        if (sim_error == 0) {
+          out = a >> b[3:0];                // SHR
+        } else {
+          out = a >> b[3:0] + 1;            // ERROR
+        }
+      b11 : 
+        if (sim_error == 0) {
+          out = $signed(a) >>> b[3:0];      // force signed and SRA
+        } else {
+          out = $signed(a) >>> b[3:0] + 1;  // ERROR
+        }
+    }
+    
+  }
+}

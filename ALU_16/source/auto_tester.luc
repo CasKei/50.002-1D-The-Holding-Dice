@@ -1,0 +1,669 @@
+module auto_tester (
+    input clk,  // clock
+    input rst,  // reset
+    input switch[1],
+    input sim_error[1],
+    output result[1]
+  )
+ 
+  {
+    fsm feeder(.clk(clk), .rst(rst)) = {START, ADD, ADD1, ADD2, ADD3, SUB, SUB1, SUB2, SUB3,
+                                      CMPEQT, CMPEQF, CMPLTT, CMPLTF, CMPLET, CMPLEF, CMPLETE,
+                                      AND, OR, XOR, NOR, NAND, B, A,
+                                      SHL, SHR, SLA, SRA, PASS, FAIL};
+
+    rom1 inputs;
+    rom2 answers;
+    alu alu16;
+    sig a[16], b[16], alufn[6], s[16], z, v, n, out[16];
+    
+    always {
+      inputs.selector = b00000; 
+      answers.selector = b00000;
+      alu16.a = b0000000000000000;
+      alu16.b = b0000000000000000;
+      alu16.sim_error = sim_error;
+      alu16.alufn = b000000;
+      result = b00;
+      case (feeder.q) { // checks the current state of the FSM, feeder
+        feeder.START: // starting state
+          if (switch){
+            feeder.d = feeder.ADD; // commence the auto tester by testing Test Case #0
+          }  
+          else {
+            feeder.d = feeder.START;
+          }
+        feeder.ADD:
+          inputs.selector = b00000;
+          answers.selector = b00000;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.ADD1; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+
+        feeder.ADD1:
+          inputs.selector = b00001;
+          answers.selector = b00001;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.ADD2; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+
+        feeder.ADD2:
+          inputs.selector = b00010;
+          answers.selector = b00010;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.ADD3; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.ADD3:
+          inputs.selector = b00011;
+          answers.selector = b00011;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.SUB; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.SUB:
+          inputs.selector = b00100;
+          answers.selector = b00100;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.SUB1; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.SUB1:
+          inputs.selector = b00101;
+          answers.selector = b00101;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.SUB2; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.SUB2:
+          inputs.selector = b00110;
+          answers.selector = b00110;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.SUB3; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.SUB3:
+          inputs.selector = b00111;
+          answers.selector = b00111;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.CMPEQT; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.CMPEQT:
+          inputs.selector = b01000;
+          answers.selector = b01000;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.CMPEQF; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.CMPEQF:
+          inputs.selector = b01001;
+          answers.selector = b01001;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.CMPLTT; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.CMPLTT:
+          inputs.selector = b01010;
+          answers.selector = b01010;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.CMPLTF; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.CMPLTF:
+          inputs.selector = b01011;
+          answers.selector = b01011;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.CMPLET; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.CMPLET:
+          inputs.selector = b01100;
+          answers.selector = b01100;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.CMPLEF; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.CMPLEF:
+          inputs.selector = b01101;
+          answers.selector = b01101;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.CMPLETE; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.CMPLETE:
+          inputs.selector = b01110;
+          answers.selector = b01110;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.AND; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.AND:
+          inputs.selector = b01111;
+          answers.selector = b01111;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.OR; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.OR:
+          inputs.selector = b10000;
+          answers.selector = b10000;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.XOR; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.XOR:
+          inputs.selector = b10001;
+          answers.selector = b10001;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.NOR; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          } 
+        feeder.NOR:
+          inputs.selector = b10010;
+          answers.selector = b10010;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.NAND; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.NAND:
+          inputs.selector = b10011;
+          answers.selector = b10011;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.B; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.B:
+          inputs.selector = b10100;
+          answers.selector = b10100;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.A; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.A:
+          inputs.selector = b10101;
+          answers.selector = b10101;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.SHL; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.SHL:
+          inputs.selector = b10110;
+          answers.selector = b10110;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.SHR; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.SHR:
+          inputs.selector = b10111;
+          answers.selector = b10111;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.SLA; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.SLA:
+          inputs.selector = b11000;
+          answers.selector = b11000;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.SRA; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.SRA:
+          inputs.selector = b11001;
+          answers.selector = b11001;
+          a = inputs.out[37:22];// A[15:0]
+          b = inputs.out[21:6];// B[15:0]
+          alufn = inputs.out[5:0];// ALUFN[5:0]
+          s = answers.out[18:3]; // ALU[15:0]
+          z = answers.out[2]; // Z
+          v = answers.out[1]; // V
+          n = answers.out[0]; // N
+          
+          alu16.alufn = alufn;
+          alu16.a = a;
+          alu16.b = b;
+          out = alu16.out; // assign the alu output of the alu to alu_actual
+
+          if (out == s & alu16.z == z & alu16.v == v & alu16.n == n){
+            feeder.d = feeder.PASS; // if correct go to next state
+            result = b01;
+          }
+        
+          else{
+            feeder.d = feeder.FAIL; //if fail go to FAIL state
+          }
+        feeder.PASS:
+          result = b01;
+        feeder.FAIL:
+          result = b10;
+      }
+    
+    }
+  }

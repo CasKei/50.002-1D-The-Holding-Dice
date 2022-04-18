@@ -1,0 +1,36 @@
+module compare_16 (
+    input z, //get from subtracting
+    input v, //get from subtracting
+    input n, //get from subtracting
+    input sim_error[1], // io_dip[0][6] messes up the output
+    
+    input alufn[6], // alufn signal
+    output out[16] //15MSBs all 0, only LSB show result
+  ) {
+
+  always {
+    out = 16b0;
+    case(alufn[3:0]) {
+      default : out[0] = 0;
+      b0011 : 
+        if (sim_error == 0) {
+          out[0] = z;          // CMPEQ (A=B)
+        } else {
+          out[0] = ~z;         // ERROR
+        }
+      b0101 : 
+        if (sim_error == 0) {
+          out[0] = n ^ v;      //CMPLT (A<B)
+        } else {
+          out[0] = ~(n ^ v);
+        }
+      b0111 : 
+        if (sim_error == 0) {
+          out[0] = z | (n ^ v);//CMPLE (A<=B)
+        } else {
+          out[0] = ~(z | (n ^ v));
+        }
+    }
+
+  }
+}

@@ -1,0 +1,40 @@
+module input_storer (
+    input clk,  // clock
+    input rst,  // reset
+    input button_a,
+    input button_b,
+    input value[16], // value to be stored
+    output outA[16], // note: outputs come from dff outputs
+    output outB[16] 
+  ) {
+  
+  // use component edge detector to detect rising edge
+  edge_detector detector_a (#RISE(1), #FALL(0), .clk(clk));
+  edge_detector detector_b (#RISE(1), #FALL(0), .clk(clk));
+  
+  // clean, synchronise and debounce button input
+  button_conditioner btnA (.clk(clk), .in(button_a));
+  button_conditioner btnB (.clk(clk), .in(button_b));
+  
+  // stores values of inputs
+  dff storeA[16] (#INIT(0), .clk(clk), .rst(rst));
+  dff storeB[16] (#INIT(0), .clk(clk), .rst(rst));
+
+  always {
+    // on clock edge, receive cleaned button input
+    detector_a.in = btnA.out;
+    detector_b.in = btnB.out;
+    
+    // store into dffs respectively on clock edge
+    if (detector_a.out) {
+      storeA.d = value;
+    }
+    if (detector_b.out) {
+      storeB.d = value;
+    }
+    
+    // outputs for this module are outputs of respective dffs
+    outA = storeA.q;
+    outB = storeB.q;
+  }
+}

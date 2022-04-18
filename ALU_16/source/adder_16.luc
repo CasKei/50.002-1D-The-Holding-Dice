@@ -1,0 +1,72 @@
+module adder_16 (
+// Inputs: 16bit a, b, 6bit alufn signal
+// Outputs: 1 bit zvn
+    input a[16],
+    input b[16],
+    input alufn[6],
+    input sim_error[1], // io_dip[0][6] messes up the output
+
+    output out[16],
+    output z[1],
+    output v[1],
+    output n[1]
+  ) {
+  
+  // out is write only, make temp var for output
+  sig s[16];
+  sig alufn0[1];
+  
+  sig extended_a[32]; // for multiplying and dividing signed numbers
+  sig extended_b[32];
+  sig muldiv_extended[32];
+
+  always {
+    s = 16b0;
+    alufn0 = alufn[0]; //make this so that computing zvn does not rely directly on alufn
+    
+    extended_a = 32b0;
+    extended_b = 32b0;
+    muldiv_extended = 32b0;
+
+    //Note: unsure if nested cases are acceptable, and if 'default' is mandatory to put in every case,
+    //but yeah hopefully this works??? It leaves out ALUFN[2] and ALUFN[1].
+    case(alufn[3]) {
+
+      b0:
+        case(alufn[0]) {
+          b0 : s = a + b; // add
+          b1 : s = a - b; // subtract
+          default : s = 16b0; // 0
+        }
+      
+      b1:
+        extended_a[15:0] = a;
+        extended_b[15:0] = b;
+        
+        case(alufn[0]) {
+          
+          b0: 
+            muldiv_extended =  extended_a * extended_b; // multiply
+            s = muldiv_extended[15:0];
+          b1: 
+            muldiv_extended = extended_a / extended_b; // divide
+            s = muldiv_extended[15:0];
+          default : s = 16b0; // 0
+        } 
+
+      default : s = 16b0; // 0
+    }
+    
+    z = ~|s; // any non-0 will make |s 1, so not|s will be true iff all 0
+    // followed lab3 but xor b with alufn to have 2's complement b
+    v = (a[15] & (b[15] ^ alufn0) & ~s[15]) | (~a[15] & ~(b[15] ^ alufn0) & s[15]);
+    n = s[15]; //msb if negative
+    
+    //write to out
+    if (sim_error == 0) {
+      out = s;
+    } else {
+      s[0] = !s[0];
+      out = s;
+  }
+}

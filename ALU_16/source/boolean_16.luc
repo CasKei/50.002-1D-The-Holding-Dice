@@ -1,0 +1,56 @@
+module boolean_16 (
+    input a[16],              // input 1
+    input b[16],              // input 2
+    input alufn[6],           // alufn signal
+    input sim_error[1],       // io_dip[0][6] messes up the output
+    output out[16]            // all 16 flash if true
+  ) {
+
+  always {
+    case(alufn[3:0]){
+      b1000 : 
+        if (sim_error == 0) {
+          out = a & b;        // AND
+        } else {
+          out = ~(a & b);     // ERROR
+        } 
+      b1110 :
+        if (sim_error == 0) { 
+          out = a | b;        // OR
+        } else {
+          out = ~(a | b);     // ERROR
+        }
+      b0110 : 
+        if (sim_error == 0) {
+          out = a ^ b;        // XOR
+        } else {
+          out = ~(a ^ b);     // ERROR
+        }
+      b1010 : 
+        if (sim_error == 0) {
+          out = a;            // A
+        } else {
+          out = ~a;           // ERROR
+        }
+      b1001 : 
+        if (sim_error == 0) {
+          out = b;            // B
+        } else {
+          out = ~b;           // ERROR
+        }
+      b0111 : 
+        if (sim_error == 0) {
+          out = ~a | ~b;      // NAND
+        } else {
+          out = ~(~a | ~b);   // sim_error
+        }
+      b0001 : 
+        if (sim_error == 0) {
+          out = ~a & ~b;      // NOR
+        } else {
+          out = ~(~a & ~b);   // ERROR
+        }
+      default : out = 16b0; //catch
+    }
+  }
+}

@@ -1,0 +1,40 @@
+module rom2 ( //check if output is correct
+    input selector[5],   
+    output out[19]        //output 19 bits (S+Z+V+N)
+  ) {
+  
+  const INPUTS = {b0001000000000000010,  //29 - Divider
+                  b1111111111111100001   //28 - Multiplier (negative A)
+                  b0000000010101110000,  //27 - Multiplier 
+                  b1110000000000000000,  //26 - Shifter (Arithmetic Left Shift)
+                  b1111111111100000000,  //25 - Shifter (Arithmetic Right Shift)
+                  b0000000000001111000,  //24 - Shifter (Shift right)
+                  b0000000011110000000,  //23 - Shifter (Shift left)
+                  b0011001111000100000,  //22 - A
+                  b1000011110000001000,  //21 - B
+                  b1011101101110110000,  //20 - NAND
+                  b1111010011111111000,  //19 - NOR
+                  b0001100000111100000,  //18 - XOR
+                  b0001010010111101000,  //17 - OR
+                  b0000010000000010000,  //16 - AND
+                  b0000000000000000000,  //15 - Comparator (Less than equals, false)
+                  b0000000000000001100,  //14 - Comparator (Less than equals, true + equal)
+                  b0000000000000001001,  //13 - Comparator (Less than equals, true)
+                  b0000000000000000000,  //12 - Comparator (Less than, false)
+                  b0000000000000001001,  //11 - Comparator (Less than, true)
+                  b0000000000000000011,  //10 - Comparator (equal, false)
+                  b0000000000000001100,  //9 - Comparator (equal, true)
+                  b0000000000000000100,  //8 - Subtraction(Zero)
+                  b0000000000000001010,  //7 - Subtraction(negative overflow)
+                  b1000000000000000011,  //6 - Subtraction (positive overflow)
+                  b0000000000010111000,  //5 - Subtraction(no overflow)
+                  b0000000000000000100,  //4 - Addition(Zero)
+                  b0100101101001100010,  //3 - Addition(Negative overflow)
+                  b1000011111001100011,  //2 - Addition(Positive overflow)
+                  b0000001000010000000   //1 - Addition(No overflow)
+  };
+
+  always {
+    out = INPUTS[selector];
+  }
+}

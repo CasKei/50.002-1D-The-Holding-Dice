@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ALU_16" board="Alchitry Au" language="Lucid" version="3">
+  <files>
+    <src>alu.luc</src>
+    <component>reset_conditioner.luc</component>
+    <src>auto_tester.luc</src>
+    <src>adder_16.luc</src>
+    <component>button_conditioner.luc</component>
+    <component>decoder.luc</component>
+    <src>rom1.luc</src>
+    <src top="true">au_top.luc</src>
+    <component>counter.luc</component>
+    <src>compare_16.luc</src>
+    <src>boolean_16.luc</src>
+    <src>input_storer.luc</src>
+    <component>pipeline.luc</component>
+    <component>edge_detector.luc</component>
+    <src>rom2.luc</src>
+    <src>shifter_16.luc</src>
+    <constraint lib="true">au.xdc</constraint>
+    <constraint lib="true">io.acf</constraint>
+    <constraint lib="true">alchitry.acf</constraint>
+  </files>
+</project>
