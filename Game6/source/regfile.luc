@@ -1,0 +1,92 @@
+module regfile (
+    input clk,  // clock
+    input rst,  // reset
+    input wa[4],  //write address
+    input we,  //write enable
+    input data[16],  //data input
+    input read_a[4],  //read a 
+    input read_b[4],  //read b
+    
+    input diceresult[3],
+    
+    output data_a[16],  //data from a
+    output data_b[16],  //data from b 
+    output pturn[1],
+    output pwin[2],
+    output p1current[8],
+    output p1accu[8],
+    output p2current[8],
+    output p2accu[8],
+    output currentdice[3]
+  ) {
+  
+  .clk(clk){
+    .rst(rst){    
+      dff st_p1curr[16];
+      dff st_p1acc[16];
+      dff st_p2curr[16];
+      dff st_p2acc[16];
+      dff st_currdice[16];
+      dff st_turn[16];
+      dff st_win[16];
+      dff temp[16];
+    }
+  }
+      
+  
+
+  always {    
+  
+    
+    if(we){
+      case(wa){
+        b0000: st_p1curr.d = data;
+        b0001: st_p1acc.d = data;
+        b0010: st_p2curr.d = data;
+        b0011: st_p2acc.d = data;
+        b0100: st_currdice.d = data;
+        b0101: st_turn.d = data;
+        b0110: st_win.d = data;
+        b0111: temp.d = data;
+      }
+    }
+    
+    
+    case(read_a){
+        b0000: data_a = st_p1curr.q;
+        b0001: data_a = st_p1acc.q;
+        b0010: data_a = st_p2curr.q;
+        b0011: data_a = st_p2acc.q;
+        b0100: data_a = st_currdice.q;
+        b0101: data_a = st_turn.q;
+        b0110: data_a = st_win.q;
+        b0111: data_a = temp.q;
+        default: data_a = 0;
+    }
+    
+    
+    case(read_b){
+        b0000: data_b = st_p1curr.q;
+        b0001: data_b = st_p1acc.q;
+        b0010: data_b = st_p2curr.q;
+        b0011: data_b = st_p2acc.q;
+        b0100: data_b = st_currdice.q;
+        b0101: data_b = st_turn.q;
+        b0110: data_b = st_win.q;
+        b0111: data_b = temp.q;
+        default: data_b = 0;
+    }
+    
+    
+    
+    pturn = st_turn.q;
+    pwin = st_win.q;
+    p1current = st_p1curr.q;
+    p1accu = st_p1acc.q;
+    p2current = st_p2curr.q;
+    p2accu = st_p2acc.q;
+    currentdice = st_currdice.q;
+    
+    
+  }
+}

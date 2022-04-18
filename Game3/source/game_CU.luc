@@ -1,0 +1,497 @@
+module game_CU (
+    input clk,  // clock
+    input rst,  // reset
+    
+    // button inputs
+    input p1rollbtn,
+    input p1holdbtn,
+    input p2rollbtn,
+    input p2holdbtn,
+    //input rstgamebtn, (maybe use rst is enough, assign in au_top)
+    
+    // outputs
+    output playerturn[1],
+    output playerwin[2],
+    output p1curr[8],
+    output p1acc[8],
+    output p2curr[8],
+    output p2acc[8],
+    output currdice[3]
+  ) {
+  
+  // edge detectors
+  edge_detector det_p1roll   (#RISE(1), #FALL(0), .clk(clk));
+  edge_detector det_p1hold   (#RISE(1), #FALL(0), .clk(clk));
+  edge_detector det_p2roll   (#RISE(1), #FALL(0), .clk(clk));
+  edge_detector det_p2hold   (#RISE(1), #FALL(0), .clk(clk));
+  edge_detector det_diceroll (#RISE(1), #FALL(0), .clk(clk));
+  
+  // button conditiners for all buttons
+  button_conditioner p1roll (.clk(clk), .in(p1rollbtn));
+  button_conditioner p1hold (.clk(clk), .in(p1holdbtn));
+  button_conditioner p2roll (.clk(clk), .in(p2rollbtn));
+  button_conditioner p2hold (.clk(clk), .in(p2holdbtn));
+  //button_conditioner reset (.clk(clk), .in(rstgamebtn));
+  
+  // registers (dffs) to store data
+  dff st_p1curr[8]   (#INIT(0), .clk(clk), .rst(rst));
+  dff st_p1acc[8]    (#INIT(0), .clk(clk), .rst(rst));
+  dff st_p2curr[8]   (#INIT(0), .clk(clk), .rst(rst));
+  dff st_p2acc[8]    (#INIT(0), .clk(clk), .rst(rst));
+  dff st_currdice[3] (#INIT(0), .clk(clk), .rst(rst));
+  dff st_turn[1]     (#INIT(0), .clk(clk), .rst(rst));
+  dff st_win[1]      (#INIT(0), .clk(clk), .rst(rst));
+  dff temp[16]       (#INIT(0), .clk(clk), .rst(rst));
+  
+  
+  
+  
+  // instantiate modules
+  alu_16 alu;
+  alu_16 alu2;
+  dice diceroll(.clk(clk), .rst(rst));
+  
+  // instantiate fsm
+  fsm game (.clk(clk), .rst(rst)) = {
+    IDLE,
+    
+    P1_TURN,
+    P1_ROLL,
+    UPDATEP1CURR,
+    RESET_P1CURR,
+    UPDATEP1ACC,
+    BRANCHP1CHECK,
+    CHKP150,
+    P1WIN,
+    
+    P2_TURN,
+    P2_ROLL,
+    UPDATEP2CURR,
+    RESET_P2CURR,
+    UPDATEP2ACC,
+    BRANCHP2CHECK,
+    CHKP250,
+    P2WIN
+  };
+  
+  always {
+    
+    // assignments if needed
+    alu.a     = 0;
+    alu.b     = 0;
+    alu.alufn = b111111; // no operation
+    alu2.a     = 0;
+    alu2.b     = 0;
+    alu2.alufn = b111111; // no operation
+    //alu_out    = alu.out;
+    playerturn = 0;
+    p1curr     = 0;
+    p1acc      = 0;
+    p2curr     = 0;
+    p2acc      = 0;
+    currdice   = 0;
+    playerwin  = 0;
+    
+    
+    // detect
+    det_p1roll.in = p1roll.out;
+    det_p1hold.in = p1hold.out;
+    det_p2roll.in = p2roll.out;
+    det_p2hold.in = p2hold.out;
+    det_diceroll.in = diceroll.out;
+    
+    
+    // fsm
+    case(game.q) {
+      
+      // IDLE
+      game.IDLE:
+        // fixed outputs: playerturn 0, p1curr, p1acc, p2curr, p2acc
+        // all init values are 0, so outputs here shld be all 0
+        //playerturn = st_turn.q; // 0 is player 1 turn
+        //p1curr     = st_p1curr.q;
+        //p1acc      = st_p1acc.q;
+        //p2curr     = st_p2curr.q;
+        //p2acc      = st_p2acc.q;
+        //currdice = st_currdice.q;
+        
+        if (det_p1roll.out || det_p1hold.out) {
+          // use this to start game to P1_TURN
+          // basically press any button to initiate game
+          game.d = game.P1_TURN;
+        } else if (det_p2roll.out || det_p2hold.out) {
+          game.d = game.P2_TURN;
+        } else {
+          game.d = game.IDLE;
+        }
+      // P1_TURN (P1 can choose roll or hold, else stay in state)
+      // if roll: run dice, store dice.out in st_currdice and show
+      // if hold: move to UPDATEP1ACC
+      // else : stay in state
+      game.P1_TURN:
+        st_turn.d = 0;
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 0 is player 1 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        if (det_p1roll.out) { // roll
+          st_currdice.d = diceroll.out; // st_currdice updated
+          currdice = st_currdice.q;
+          game.d = game.P1_ROLL;
+        } else if (det_p1hold.out) { // hold
+          game.d = game.UPDATEP1ACC;
+        } else {
+          game.d = game.P1_TURN;
+        }
+      // P2_TURN (P2 can choose roll or hold, else stay in state)
+      // if roll: run dice, store dice.out in st_currdice and show
+      // if hold: move to UPDATEP2ACC
+      // else : stay in state
+      game.P2_TURN:
+        st_turn.d = 1;
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        if (det_p2roll.out) { // roll
+          st_currdice.d = diceroll.out; // st_currdice updated
+          currdice = st_currdice.q;
+          game.d = game.P2_ROLL;
+        } else if (det_p2hold.out) { // hold
+          game.d = game.UPDATEP2ACC;
+        } else {
+          game.d = game.P2_TURN;
+        }
+      
+      
+      // P1_ROLL (P1 has rolled and currdice is stored and displayed)
+      // if 1: move to RESET_P1CURR. other: move to UPDATEP1CURR
+      game.P1_ROLL:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 0 is player 1 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q; // now has updated value from TURN
+        
+        // if currdice is 1: RESET_CURRENT_P1SCORE,
+        //else : P1_BRANCH_DICEROLL
+        if (st_currdice.q == 1) {
+          game.d = game.RESET_P1CURR;
+        } else if (st_currdice.q == 0){
+          // this is an error, but catch and restart game
+          game.d = game.IDLE;
+        } else if (st_currdice.q == 2||st_currdice.q == 3||st_currdice.q == 4||st_currdice.q == 5||st_currdice.q == 6){
+          // rolled 2 to 6
+          game.d = game.UPDATEP1CURR;
+        } else {
+          // final catch
+          game.d = game.P1_ROLL;
+        }
+      
+      
+      // P2_ROLL (P2 has rolled and currdice is stored and displayed)
+      // if 1: move to RESET_P2CURR. other: move to UPDATEP2CURR
+      game.P2_ROLL:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q; // now has updated value from TURN
+        
+        // if currdice is 1: RESET_CURRENT_P1SCORE,
+        //else : P1_BRANCH_DICEROLL
+        if (st_currdice.q == 1) {
+          game.d = game.RESET_P2CURR;
+        } else if (st_currdice.q == 0){
+          // this is an error, but catch and restart game
+          game.d = game.IDLE;
+        } else if (st_currdice.q == 2||st_currdice.q == 3||st_currdice.q == 4||st_currdice.q == 5||st_currdice.q == 6){
+          // rolled 2 to 6
+          game.d = game.UPDATEP2CURR;
+        } else {
+          // final catch
+          game.d = game.P2_ROLL;
+        }
+      
+      
+      // UPDATEP1CURR (P1 has rolled and currdice is 2 to 6)
+      // P1CURR = oldP1CURR + CURRDICE
+      // move back to P1_TURN
+      game.UPDATEP1CURR:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 0 is player 1 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        // p1curr = old p1curr + currdice
+        alu.a = st_p1curr.q;
+        alu.b = st_currdice.q;
+        alu.alufn = b000000; // add
+        st_p1curr.d = alu.out; // curr + thisroll
+        
+        // move back to P1_TURN
+        game.d = game.P1_TURN;
+      
+      
+      // UPDATEP2CURR (P2 has rolled and currdice is 2 to 6)
+      // P2CURR = oldP2CURR + CURRDICE
+      // move back to P2_TURN
+      game.UPDATEP2CURR:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        //p1curr     = st_p1curr.q;
+        //p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        // p1curr = old p1curr + currdice
+        alu.a = st_p2curr.q;
+        alu.b = st_currdice.q;
+        alu.alufn = b000000; // add
+        st_p2curr.d = alu.out; // curr + thisroll
+        
+        // move back to P2_TURN
+        game.d = game.P2_TURN;
+      
+      
+      // RESET_P1CURR
+      // P1CURR = P1CURR * ZERO
+      // move to P2_TURN
+      game.RESET_P1CURR:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 0 is player 1 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        // P1CURR = P1CURR * ZERO
+        alu.a = st_p1curr.q;
+        alu.b = 0;
+        alu.alufn = b001000;
+        st_p1curr.d = alu.out; // p1curr back to 0
+        
+        // move to P2_TURN
+        game.d = game.P2_TURN;
+      
+      
+      // RESET_P2CURR
+      // P2CURR = P2CURR * ZERO
+      // move to P1_TURN
+      game.RESET_P2CURR:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        // P2CURR = P2CURR * ZERO
+        alu.a = st_p1curr.q;
+        alu.b = 0;
+        alu.alufn = b001000;
+        st_p2curr.d = alu.out; // p1curr back to 0
+        
+        // move to P1_TURN
+        game.d = game.P1_TURN;
+      
+      
+      // UPDATEP1ACC (player chose to hold)
+      // P1ACC = P1ACC + P1CURR
+      // move to check if new P1ACC can win (CHKP150)
+      game.UPDATEP1ACC:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 0 is player 1 turn
+        p1curr     = st_p1curr.q; // has sum of all added rolls
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        // P1ACC = P1ACC + P1CURR
+        alu.a = st_p1acc.q;
+        alu.b = st_p1curr.q;
+        alu.alufn = b000000;
+        st_p1acc.d = alu.out; // update
+        
+        // P1CURR = P1CURR * ZERO
+        alu2.a = st_p1curr.q;
+        alu2.b = 0;
+        alu2.alufn = b001000;
+        st_p1curr.d = alu2.out;
+        
+        // move to check if new P1ACC can win (CHKP150)
+        game.d = game.CHKP150;
+      
+      
+      // UPDATEP2ACC (player chose to hold)
+      // P2ACC = P2ACC + P2CURR
+      // move to check if new P2ACC can win (CHKP250)
+      game.UPDATEP2ACC:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        p1curr     = st_p1curr.q; // has sum of all added rolls
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        
+        // P2ACC = P2ACC + P2CURR
+        alu.a = st_p2acc.q;
+        alu.b = st_p2curr.q;
+        alu.alufn = b000000;
+        st_p2acc.d = alu.out; // update
+      
+        
+        // P2CURR = P2CURR * ZERO
+        alu2.a = st_p2curr.q;
+        alu2.b = 0;
+        alu2.alufn = b001000;
+        st_p2curr.d = alu2.out;
+        
+        // move to check if new P2ACC can win (CHKP250)
+        game.d = game.CHKP250;
+      
+
+      
+      
+      // CHKP150 (p1acc is updated, check if >= 50)
+      // win = CMPLE( 50 , st_p1acc.q)
+      // if win: move to P1WIN, else: move to P2_TURN
+      game.CHKP150:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 0 is player 1 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        // win = CMPLE( 50 , st_p1acc.q)
+        alu.a = 50;
+        alu.b = st_p1acc.q;
+        alu.alufn = b110111;
+        st_win.d = alu.out;
+        
+        game.d = game.BRANCHP1CHECK;
+      game.BRANCHP1CHECK:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        playerwin  = st_win.q;
+        
+        
+        if (st_win.q == 0) {
+          game.d = game.P2_TURN;
+        } else {
+          game.d = game.P1WIN;
+        }
+      
+      
+      // CHKP250 (p1acc is updated, check if >= 50)
+      // win = CMPLE( 50 , st_p2acc.q)
+      // if win: move to P1WIN, else: move to P2_TURN
+      game.CHKP250:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        // win = CMPLE( 50 , st_p2acc.q)
+        alu.a = 50;
+        alu.b = st_p2acc.q;
+        alu.alufn = b110111;
+        st_win.d = alu.out;
+        
+        game.d = game.BRANCHP2CHECK;
+        
+        
+        
+        
+      game.BRANCHP2CHECK:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        playerwin  = st_win.q;
+        
+        
+        if (st_win.q == 0) {
+          game.d = game.P1_TURN;
+        } else {
+          game.d = game.P2WIN;
+        }
+      
+        
+      
+      // P1WIN (st_win = 1, p1acc >= 50) freeze outputs and stop
+      game.P1WIN:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 0 is player 1 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        st_turn.d = 0; // make sure p1 light up
+        
+        game.d = game.P1WIN; // stay here
+      
+      
+      // P2WIN (st_win = 1, p2acc >= 50) freeze outputs and stop
+      game.P2WIN:
+        // show all currently stored outputs
+        playerturn = st_turn.q; // 1 is player 2 turn
+        p1curr     = st_p1curr.q;
+        p1acc      = st_p1acc.q;
+        p2curr     = st_p2curr.q;
+        p2acc      = st_p2acc.q;
+        currdice   = st_currdice.q;
+        
+        st_turn.d = 1; // make sure p2 light up
+        
+        game.d = game.P2WIN; // stay here
+      
+      
+      default:
+        alu.a     = 0;
+        alu.b     = 0;
+        alu.alufn = b111111; // no operation
+        alu2.a     = 0;
+        alu2.b     = 0;
+        alu2.alufn = b111111; // no operation
+    }
+    
+    
+    
+  }
+}

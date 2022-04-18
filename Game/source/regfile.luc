@@ -1,0 +1,84 @@
+module regfile (
+    input clk,  // clock
+    input rst,  // reset
+    input write_address[4], // write address
+    input we, // write enable
+    input data[16], // data in
+    
+    
+    input read_address_a[4], //address port a 
+    input read_address_b[4], //address port b
+    output out_a[16], //read port a
+    output out_b[16], //read port b
+    
+    //debug
+    
+    output all_buttons[4],
+
+    output counter_out[16]
+
+  ) 
+
+{
+  .clk(clk){
+    .rst(rst){
+
+      
+      dff p_A__accScore[16];
+      dff p_B__accScore[16];
+      dff p_A__curScore[16];
+      dff p_B__curScore[16];
+      dff player_turn[16];
+      dff diceScore[16];
+      dff tempVar[16];
+      
+    }
+  }
+
+  always {
+  
+    //write port
+    if (we){
+      case(write_address){
+        b0000 : p_A__accScore.d = data;
+        b0001 : p_B__accScore.d = data;
+        b0010 : p_A__curScore.d = data;
+        b0011 : p_B__curScore.d = data;
+        b0111 : player_turn.d = data;
+        b1000 : diceScore.d = data;
+        b1111 : tempVar.d = data;
+      }
+    }
+    
+      
+    //read port a
+    case(read_address_a){
+        b0000 : out_a = p_A__accScore.q;
+        b0001 : out_a = p_B__accScore.q;
+        b0010 : out_a = p_A__curScore.q;
+        b0011 : out_a = p_B__curScore.q;
+        b0111 : out_a = player_turn.q;
+        b1000 : out_a = diceScore.q;
+        b1111 : out_a = tempVar.q;
+        default : out_a = 0;
+    }
+    
+    //read port b
+    case(read_address_b){
+        b0000 : out_b = p_A__accScore.q;
+        b0001 : out_b = p_B__accScore.q;
+        b0010 : out_b = p_A__curScore.q;
+        b0011 : out_b = p_B__curScore.q;
+        b0111 : out_b = player_turn.q;
+        b1000 : out_b = diceScore.q;
+        b1111 : out_b = tempVar.q;
+        default : out_b = 0;
+    }
+      
+    
+    //For debugging
+    all_buttons[3] = diceScore.q[3];
+
+    counter_out = player_turn.q;
+  }
+}

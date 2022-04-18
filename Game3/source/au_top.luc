@@ -1,0 +1,105 @@
+module au_top (
+    input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input usb_rx,           // USB->Serial input
+    output usb_tx,          // USB->Serial output
+    output io_led [3][8],   // LEDs on IO Shield
+    //output io_seg [8],      // 7-segment LEDs on IO Shield
+    //output io_sel [4],      // Digit select on IO Shield
+    //input io_button [5],    // 5 buttons on IO Shield
+    //input io_dip [3][8]     // DIP switches on IO Shield
+    
+    // external
+    input p1rollbutton,
+    input p1holdbutton,
+    input p2rollbutton,
+    input p2holdbutton,
+    input resetbutton,
+    
+    output display_dice_seg[7],
+    output display_dice_sel[1],
+    //output display_p1curr_seg[7],
+    //output display_p1curr_sel[2],
+    //output display_p1acc_seg[8],
+    //output display_p1acc_sel[2],
+    //output display_p2curr_seg[8],
+    //output display_p2curr_sel[2],
+    //output display_p2acc_seg[8],
+    //output display_p2acc_sel[2],
+    output display_p1turn_led,
+    output display_p2turn_led
+    
+    
+  ) {
+  
+  sig rst;                  // reset signal
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+  }
+  
+  //game_CU game (.clk(clk), .rst(io_button[1]));
+  game_CU game (.clk(clk), .rst(resetbutton));
+  dice_seg display_dice;
+  //display_player_score display_p1curr  (.clk(clk), .rst(resetbutton));
+  //display_player_score display_p1acc  (.clk(clk), .rst(resetbutton));
+  //display_player_score display_p2curr  (.clk(clk), .rst(resetbutton));
+  //display_player_score display_p2acc  (.clk(clk), .rst(resetbutton));
+
+  always {
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    
+    usb_tx = usb_rx;        // loop serial port
+    
+    led = 8h00;             // turn LEDs off
+    
+    //io_led = 3x{{8h00}};    // turn LEDs off
+    //io_seg = 8hff;          // turn segments off
+    //io_sel = 4hf;           // select no digits
+    
+    
+    // test
+    //game.p1rollbtn = io_button[3];
+    //game.p2rollbtn = io_button[4];
+    //game.p1holdbtn = io_button[0];
+    //game.p2holdbtn = io_button[2];
+    
+    //io_led[0][0] = game.playerturn;
+    //io_led[0][7] = ~game.playerturn;
+    
+    io_led[1] = game.p1acc;
+    io_led[2] = game.p2acc;
+    
+    display_dice.char = game.currdice;
+    //io_seg = ~display_dice.segs;
+    //io_sel = ~4h1;
+    
+    
+    // inputs (btns)
+    reset_cond.in = ~resetbutton; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    game.p1rollbtn = p1rollbutton;
+    game.p2rollbtn = p2rollbutton;
+    game.p1holdbtn = p1holdbutton;
+    game.p2holdbtn = p2holdbutton;
+    
+    //outputs
+    // LEDs
+    display_p1turn_led = game.playerturn;
+    display_p2turn_led = ~game.playerturn;
+    
+    // dice seg 
+    display_dice_seg = display_dice.segs;
+    display_dice_sel = ~4h1;
+        
+    
+    //display_p1curr.value = game.p1curr;
+    //display_p1curr_seg = display_p1curr.segs;
+    //display_p1curr_sel = display_p1curr.digits;
+    
+  }
+}

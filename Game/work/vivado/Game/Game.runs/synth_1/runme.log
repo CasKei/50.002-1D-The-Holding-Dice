@@ -1,0 +1,412 @@
+
+*** Running vivado
+    with args -log au_top_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_top_0.tcl
+
+
+
+****** Vivado v2021.2.1 (64-bit)
+  **** SW Build 3414424 on Sun Dec 19 10:57:22 MST 2021
+  **** IP Build 3405791 on Sun Dec 19 15:54:35 MST 2021
+    ** Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+
+source au_top_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 1243.316 ; gain = 9.383
+Command: synth_design -top au_top_0 -part xc7a35tftg256-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tftg256-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 27928
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'au_top_0' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/au_top_0.v:7]
+INFO: [Synth 8-6157] synthesizing module 'game_CU_1' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/game_CU_1.v:7]
+INFO: [Synth 8-6157] synthesizing module 'dice_4' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/dice_4.v:11]
+INFO: [Synth 8-6157] synthesizing module 'edge_detector_5' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/edge_detector_5.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'edge_detector_5' (1#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/edge_detector_5.v:12]
+INFO: [Synth 8-6157] synthesizing module 'button_conditioner_6' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/button_conditioner_6.v:13]
+INFO: [Synth 8-6157] synthesizing module 'pipeline_10' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/pipeline_10.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'pipeline_10' (2#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/pipeline_10.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'button_conditioner_6' (3#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/button_conditioner_6.v:13]
+INFO: [Synth 8-6157] synthesizing module 'edge_detector_7' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/edge_detector_7.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'edge_detector_7' (4#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/edge_detector_7.v:12]
+INFO: [Synth 8-6157] synthesizing module 'counter_8' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/counter_8.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'counter_8' (5#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/counter_8.v:14]
+INFO: [Synth 8-6157] synthesizing module 'pn_gen_9' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/pn_gen_9.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'pn_gen_9' (6#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/pn_gen_9.v:11]
+WARNING: [Synth 8-3936] Found unconnected internal register 'M_numhold_q_reg' and it is trimmed from '5' to '3' bits. [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/dice_4.v:103]
+WARNING: [Synth 8-3936] Found unconnected internal register 'M_numhold_d_reg' and it is trimmed from '5' to '3' bits. [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/dice_4.v:72]
+INFO: [Synth 8-6155] done synthesizing module 'dice_4' (7#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/dice_4.v:11]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/game_CU_1.v:99]
+INFO: [Synth 8-6155] done synthesizing module 'game_CU_1' (8#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/game_CU_1.v:7]
+INFO: [Synth 8-6157] synthesizing module 'reset_conditioner_2' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/reset_conditioner_2.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'reset_conditioner_2' (9#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/reset_conditioner_2.v:11]
+INFO: [Synth 8-6157] synthesizing module 'dice_seg_3' [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/dice_seg_3.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/dice_seg_3.v:16]
+INFO: [Synth 8-6155] done synthesizing module 'dice_seg_3' (10#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/dice_seg_3.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'au_top_0' (11#1) [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.srcs/sources_1/imports/verilog/au_top_0.v:7]
+WARNING: [Synth 8-3917] design au_top_0 has port led[7] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[6] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[5] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[4] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[3] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[2] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[1] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[0] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[23] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[22] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[21] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[20] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[19] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[18] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[17] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[16] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[15] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[14] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[13] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[12] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[11] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[10] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[9] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[8] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[7] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[6] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[5] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[4] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[3] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[2] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[1] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[0] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_sel[3] driven by constant 1
+WARNING: [Synth 8-3917] design au_top_0 has port io_sel[2] driven by constant 1
+WARNING: [Synth 8-3917] design au_top_0 has port io_sel[1] driven by constant 1
+WARNING: [Synth 8-3917] design au_top_0 has port io_sel[0] driven by constant 0
+WARNING: [Synth 8-7129] Port regfile_datain[15] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[14] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[13] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[12] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[11] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[10] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[9] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[8] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[7] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[6] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[5] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[4] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[3] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[2] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_datain[1] in module game_CU_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_button[4] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[23] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[22] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[21] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[20] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[19] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[18] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[17] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[16] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[15] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[14] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[13] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[12] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[11] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[10] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[9] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[8] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[7] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[6] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[5] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[4] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[3] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[2] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[1] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[0] in module au_top_0 is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 1243.316 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/cassi/Downloads/Apps/library/components/au.xdc]
+Finished Parsing XDC File [C:/Users/cassi/Downloads/Apps/library/components/au.xdc]
+Parsing XDC File [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/constraint/custom.xdc]
+Finished Parsing XDC File [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/constraint/custom.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/constraint/custom.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/au_top_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/au_top_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1243.316 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tftg256-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'M_game_fsm_q_reg' in module 'game_CU_1'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+*
+          DEBUG_game_fsm |                                1 |                            00000
+          DEBUG_game_fsm |                                1 |                            00000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'M_game_fsm_q_reg' using encoding 'sequential' in module 'game_CU_1'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-223] decloning instance 'game/dicedice/edge_rng' (edge_detector_7) to 'game/dicedice/edge_seed'
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    2 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 2     
+	   4 Input     32 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 4     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 1     
+	   8 Input    7 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 3     
+	   2 Input    3 Bit        Muxes := 3     
+	   6 Input    3 Bit        Muxes := 3     
+	   8 Input    3 Bit        Muxes := 1     
+	   6 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 5     
+	   6 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3917] design au_top_0 has port led[7] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[6] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[5] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[4] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[3] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[2] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[1] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port led[0] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[23] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[22] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[21] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[20] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[19] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[18] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[17] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[16] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[15] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[14] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[13] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[12] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[11] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[10] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[9] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[8] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[7] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[6] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[5] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[4] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[3] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[2] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[1] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_led[0] driven by constant 0
+WARNING: [Synth 8-3917] design au_top_0 has port io_seg[7] driven by constant 1
+WARNING: [Synth 8-3917] design au_top_0 has port io_sel[3] driven by constant 1
+WARNING: [Synth 8-3917] design au_top_0 has port io_sel[2] driven by constant 1
+WARNING: [Synth 8-3917] design au_top_0 has port io_sel[1] driven by constant 1
+WARNING: [Synth 8-3917] design au_top_0 has port io_sel[0] driven by constant 0
+WARNING: [Synth 8-7129] Port io_button[4] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_button[3] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_button[2] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_button[1] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[23] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[22] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[21] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[20] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[19] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[18] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[17] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[16] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[15] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[14] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[13] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[12] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[11] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[10] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[9] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[8] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[7] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[6] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[5] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[4] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[3] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[2] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[1] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port io_dip[0] in module au_top_0 is either unconnected or has no load
+WARNING: [Synth 8-3332] Sequential element (game/FSM_sequential_M_game_fsm_q_reg) is unused and will be removed from module au_top_0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:37 ; elapsed = 00:00:41 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:45 ; elapsed = 00:00:49 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:45 ; elapsed = 00:00:49 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:45 ; elapsed = 00:00:49 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:45 ; elapsed = 00:00:49 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:45 ; elapsed = 00:00:50 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:45 ; elapsed = 00:00:50 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    12|
+|3     |LUT1   |     5|
+|4     |LUT2   |     3|
+|5     |LUT3   |     9|
+|6     |LUT4   |    22|
+|7     |LUT5   |    10|
+|8     |LUT6   |    15|
+|9     |FDRE   |   136|
+|10    |FDSE   |    56|
+|11    |IBUF   |     4|
+|12    |OBUF   |    45|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:45 ; elapsed = 00:00:50 . Memory (MB): peak = 1243.316 ; gain = 0.000
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 67 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:46 . Memory (MB): peak = 1243.316 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:45 ; elapsed = 00:00:50 . Memory (MB): peak = 1243.316 ; gain = 0.000
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1243.316 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 12 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1243.316 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 81f6fcc9
+INFO: [Common 17-83] Releasing license: Synthesis
+42 Infos, 145 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:52 ; elapsed = 00:01:05 . Memory (MB): peak = 1243.316 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game/work/vivado/Game/Game.runs/synth_1/au_top_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file au_top_0_utilization_synth.rpt -pb au_top_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Apr 14 17:53:24 2022...

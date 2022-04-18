@@ -1,0 +1,33 @@
+#-----------------------------------------------------------
+# Vivado v2021.2.1 (64-bit)
+# SW Build 3414424 on Sun Dec 19 10:57:22 MST 2021
+# IP Build 3405791 on Sun Dec 19 15:54:35 MST 2021
+# Start of session at: Fri Apr 15 18:30:35 2022
+# Process ID: 21312
+# Current directory: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.runs/synth_1
+# Command line: vivado.exe -log au_top_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_top_0.tcl
+# Log file: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.runs/synth_1/au_top_0.vds
+# Journal file: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.runs/synth_1\vivado.jou
+# Running On: KC-LAPTOP, OS: Windows, CPU Frequency: 2304 MHz, CPU Physical cores: 4, Host memory: 16922 MB
+#-----------------------------------------------------------
+source au_top_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:08 . Memory (MB): peak = 1243.500 ; gain = 9.668
+Command: synth_design -top au_top_0 -part xc7a35tftg256-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tftg256-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 11032
+ERROR: [Synth 8-1749] cannot have packed dimensions of type integer [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.srcs/sources_1/imports/verilog/game_CU_2.v:106]
+ERROR: [Synth 8-1749] cannot have packed dimensions of type integer [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.srcs/sources_1/imports/verilog/game_CU_2.v:108]
+ERROR: [Synth 8-1749] cannot have packed dimensions of type integer [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.srcs/sources_1/imports/verilog/game_CU_2.v:110]
+ERROR: [Synth 8-1749] cannot have packed dimensions of type integer [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.srcs/sources_1/imports/verilog/game_CU_2.v:112]
+INFO: [Synth 8-2350] module game_CU_2 ignored due to previous errors [C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.srcs/sources_1/imports/verilog/game_CU_2.v:7]
+Failed to read verilog 'C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game2/work/vivado/Game2/Game2.srcs/sources_1/imports/verilog/game_CU_2.v'
+INFO: [Common 17-83] Releasing license: Synthesis
+7 Infos, 0 Warnings, 0 Critical Warnings and 5 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Fri Apr 15 18:31:01 2022...

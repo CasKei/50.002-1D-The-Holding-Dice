@@ -1,0 +1,126 @@
+module display_player_score (
+    input clk,  // clock
+    input rst,  // reset
+    input value[8],
+    output segs[7],
+    output digits[2]
+  ) {
+  
+  .clk(clk) {
+    .rst(rst) {
+      multi_seven_seg seg_display;
+    }
+  }
+  
+  
+  always {
+    segs = 0;
+    digits = 0;
+    seg_display.values = {4h0,4h0,4h0,4h0};
+    case (value) {
+      8h0: seg_display.values = {4h0,4h0,4h0,4h0};
+      8h1: seg_display.values = {4h0,4h0,4h0,4h1};
+      8h2: seg_display.values = {4h0,4h0,4h0,4h2};
+      8h3: seg_display.values = {4h0,4h0,4h0,4h3};
+      8h4: seg_display.values = {4h0,4h0,4h0,4h4};
+      8h5: seg_display.values = {4h0,4h0,4h0,4h5};
+      8h6: seg_display.values = {4h0,4h0,4h0,4h6};
+      8h7: seg_display.values = {4h0,4h0,4h0,4h7};
+      8h8: seg_display.values = {4h0,4h0,4h0,4h8};
+      8h9: seg_display.values = {4h0,4h0,4h0,4h9};
+      8hA: seg_display.values = {4h0,4h0,4h1,4h0}; //10
+      8hB: seg_display.values = {4h0,4h0,4h1,4h1};
+      8hC: seg_display.values = {4h0,4h0,4h1,4h2};
+      8hD: seg_display.values = {4h0,4h0,4h1,4h3};
+      8hE: seg_display.values = {4h0,4h0,4h1,4h4};
+      8hF: seg_display.values = {4h0,4h0,4h1,4h5}; 
+      8h10: seg_display.values = {4h0,4h0,4h1,4h6};
+      8h11: seg_display.values = {4h0,4h0,4h1,4h7};
+      8h12: seg_display.values = {4h0,4h0,4h1,4h8};
+      8h13: seg_display.values = {4h0,4h0,4h1,4h9};
+      8h14: seg_display.values = {4h0,4h0,4h2,4h0}; //20
+      8h15: seg_display.values = {4h0,4h0,4h2,4h1};
+      8h16: seg_display.values = {4h0,4h0,4h2,4h2};
+      8h17: seg_display.values = {4h0,4h0,4h2,4h3};
+      8h18: seg_display.values = {4h0,4h0,4h2,4h4};
+      8h19: seg_display.values = {4h0,4h0,4h2,4h5};
+      8h1A: seg_display.values = {4h0,4h0,4h2,4h6}; 
+      8h1B: seg_display.values = {4h0,4h0,4h2,4h7};
+      8h1C: seg_display.values = {4h0,4h0,4h2,4h8};
+      8h1D: seg_display.values = {4h0,4h0,4h2,4h9};
+      8h1E: seg_display.values = {4h0,4h0,4h3,4h0}; // 30
+      8h1F: seg_display.values = {4h0,4h0,4h3,4h1}; 
+      8h20: seg_display.values = {4h0,4h0,4h3,4h2};
+      8h21: seg_display.values = {4h0,4h0,4h3,4h3};
+      8h22: seg_display.values = {4h0,4h0,4h3,4h4};
+      8h23: seg_display.values = {4h0,4h0,4h3,4h5};
+      8h24: seg_display.values = {4h0,4h0,4h3,4h6};
+      8h25: seg_display.values = {4h0,4h0,4h3,4h7};
+      8h26: seg_display.values = {4h0,4h0,4h3,4h8};
+      8h27: seg_display.values = {4h0,4h0,4h3,4h9};
+      8h28: seg_display.values = {4h0,4h0,4h4,4h0}; // 40
+      8h29: seg_display.values = {4h0,4h0,4h4,4h1};
+      8h2A: seg_display.values = {4h0,4h0,4h4,4h2};
+      8h2B: seg_display.values = {4h0,4h0,4h4,4h3};
+      8h2C: seg_display.values = {4h0,4h0,4h4,4h4};
+      8h2D: seg_display.values = {4h0,4h0,4h4,4h5};
+      8h2E: seg_display.values = {4h0,4h0,4h4,4h6};
+      8h2F: seg_display.values = {4h0,4h0,4h4,4h7};
+      8h30: seg_display.values = {4h0,4h0,4h4,4h8};
+      8h31: seg_display.values = {4h0,4h0,4h4,4h9};
+      8h32: seg_display.values = {4h0,4h0,4h5,4h0}; // 50
+      8h33: seg_display.values = {4h0,4h0,4h5,4h1};
+      8h34: seg_display.values = {4h0,4h0,4h5,4h2};
+      8h35: seg_display.values = {4h0,4h0,4h5,4h3};
+      8h36: seg_display.values = {4h0,4h0,4h5,4h4};
+      8h37: seg_display.values = {4h0,4h0,4h5,4h5};
+      8h38: seg_display.values = {4h0,4h0,4h5,4h6};
+      8h39: seg_display.values = {4h0,4h0,4h5,4h7};
+      8h3A: seg_display.values = {4h0,4h0,4h5,4h8}; 
+      8h3B: seg_display.values = {4h0,4h0,4h5,4h9};
+      8h3C: seg_display.values = {4h0,4h0,4h6,4h0}; // 60
+      8h3D: seg_display.values = {4h0,4h0,4h6,4h1};
+      8h3E: seg_display.values = {4h0,4h0,4h6,4h2};
+      8h3F: seg_display.values = {4h0,4h0,4h6,4h3}; 
+      8h40: seg_display.values = {4h0,4h0,4h6,4h4};
+      8h41: seg_display.values = {4h0,4h0,4h6,4h5};
+      8h42: seg_display.values = {4h0,4h0,4h6,4h6};
+      8h43: seg_display.values = {4h0,4h0,4h6,4h7};
+      8h44: seg_display.values = {4h0,4h0,4h6,4h8};
+      8h45: seg_display.values = {4h0,4h0,4h6,4h9};
+      8h46: seg_display.values = {4h0,4h0,4h7,4h0}; // 70
+      8h47: seg_display.values = {4h0,4h0,4h7,4h1};
+      8h48: seg_display.values = {4h0,4h0,4h7,4h2};
+      8h49: seg_display.values = {4h0,4h0,4h7,4h3};
+      8h4A: seg_display.values = {4h0,4h0,4h7,4h4};
+      8h4B: seg_display.values = {4h0,4h0,4h7,4h5};
+      8h4C: seg_display.values = {4h0,4h0,4h7,4h6};
+      8h4D: seg_display.values = {4h0,4h0,4h7,4h7};
+      8h4E: seg_display.values = {4h0,4h0,4h7,4h8};
+      8h4F: seg_display.values = {4h0,4h0,4h7,4h9};
+      8h50: seg_display.values = {4h0,4h0,4h8,4h0}; // 80
+      8h51: seg_display.values = {4h0,4h0,4h8,4h1};
+      8h52: seg_display.values = {4h0,4h0,4h8,4h2};
+      8h53: seg_display.values = {4h0,4h0,4h8,4h3};
+      8h54: seg_display.values = {4h0,4h0,4h8,4h4};
+      8h55: seg_display.values = {4h0,4h0,4h8,4h5};
+      8h56: seg_display.values = {4h0,4h0,4h8,4h6};
+      8h57: seg_display.values = {4h0,4h0,4h8,4h7};
+      8h58: seg_display.values = {4h0,4h0,4h8,4h8};
+      8h59: seg_display.values = {4h0,4h0,4h8,4h9};
+      8h5A: seg_display.values = {4h0,4h0,4h9,4h0}; //90
+      8h5B: seg_display.values = {4h0,4h0,4h9,4h1};
+      8h5C: seg_display.values = {4h0,4h0,4h9,4h2};
+      8h5D: seg_display.values = {4h0,4h0,4h9,4h3};
+      8h5E: seg_display.values = {4h0,4h0,4h9,4h4};
+      8h5F: seg_display.values = {4h0,4h0,4h9,4h5}; 
+      8h60: seg_display.values = {4h0,4h0,4h9,4h6};
+      8h61: seg_display.values = {4h0,4h0,4h9,4h7};
+      8h62: seg_display.values = {4h0,4h0,4h9,4h8};
+      8h63: seg_display.values = {4h0,4h0,4h9,4h9};
+    }
+    
+    segs = ~seg_display.seg;
+    digits = ~seg_display.sel;
+  }
+}

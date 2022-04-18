@@ -1,0 +1,100 @@
+module gamebeta (
+    input clk,  // clock
+    input rst,  // reset
+    
+    // button inputs
+    input p1rollbutn,
+    input p1holdbutn,
+    input p2rollbutn,
+    input p2holdbutn,
+    
+    output playerturn[1],
+    output playerwin[2],
+    output p1curr[8],
+    output p1acc[8],
+    output p2curr[8],
+    output p2acc[8],
+    output currdice[3]
+  ) {
+
+  
+  sig alu_in_a[16];
+  sig alu_in_b[16];
+  
+  edge_detector det_diceroll (#RISE(1), #FALL(0), .clk(clk));
+
+  dice diceroll (.clk(clk), .rst(rst));
+  alu_16 gamealu;
+  
+  .clk(clk){
+    .rst(rst){
+      game_CU cu;
+      regfile regs;
+
+    }
+
+    
+  }
+  
+  
+  always {
+  
+    cu.p1rollbtn = p1rollbutn;
+    cu.p1holdbtn = p1holdbutn;
+    cu.p2rollbtn = p2rollbutn;
+    cu.p2holdbtn = p2holdbutn;
+        
+    
+    det_diceroll.in = diceroll.out;
+    cu.haswinner = regs.pwin;
+    cu.diceres = diceroll.out;
+    regs.diceresult = diceroll.out;
+    
+    regs.read_a = cu.read_a;
+    regs.read_b = cu.read_b;
+    regs.we = cu.we;
+    regs.wa = cu.write_a;
+    
+    
+    
+    //asel
+    case(cu.asel){
+      b00: alu_in_a = regs.data_a;
+      b01: alu_in_a = diceroll.out;
+      b10: alu_in_a = 50;
+      default: alu_in_a = 1;
+    }
+    
+    //bsel
+    case(cu.bsel){
+      b00: alu_in_b = regs.data_b;
+      b01: alu_in_b = 0;
+      b10: alu_in_b = 50;
+      default: alu_in_b = 1;
+    }
+    
+    //alu
+    gamealu.a = alu_in_a;
+    gamealu.b = alu_in_b;
+    gamealu.alufn = cu.alufn;
+    
+    //wdsel
+    case(cu.alu_sel){
+      b01: regs.data = 0;
+      b10: regs.data = 1;
+      default: regs.data = gamealu.out;
+    }
+   
+    
+    
+    playerturn = regs.pturn;
+    playerwin = regs.pwin;
+    p1curr = regs.p1current;
+    p1acc = regs.p1accu;
+    p2curr = regs.p2current;
+    p2acc = regs.p2accu;
+    currdice = regs.currentdice;
+
+    
+  }
+}

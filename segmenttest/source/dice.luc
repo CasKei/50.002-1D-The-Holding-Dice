@@ -1,0 +1,44 @@
+module dice #(
+SEED = 128h843233523a613966423b622562592c62: SEED.WIDTH == 128 && SEED[95:0] != 0
+)
+	(
+		input rollbtn,
+		input clk,
+		input rst,
+		output out[3]
+	) {
+		dff dice_out[3] (#INIT(0), .clk(clk), .rst(rst));
+		edge_detector detector_a (#RISE(1), #FALL(0), .clk(clk));
+		button_conditioner btnA (.clk(clk), .in(rollbtn));
+		.clk(clk) {
+			edge_detector edge_rng;
+			edge_detector edge_seed;
+			dff seed[2];
+			dff numhold[3];
+			.rst(rst) {
+				counter slowerclock(#SIZE(10), #DIV(24));
+			     pn_gen random_number;
+			}
+		}
+		always {
+			out = b111;
+			random_number.seed = seed.q;
+
+			edge_rng.in = slowerclock.value;
+			random_number.next = edge_rng.out;
+
+			edge_seed.in = slowerclock.value;
+
+			if(edge_seed.out) {
+				seed.d = seed.q + 1;
+			}
+			numhold.d = random_number.num[2:0];
+
+
+			detector_a.in = btnA.out;
+			if (detector_a.out) {
+				dice_out.d = numhold.q;
+			}
+			out = dice_out.q;
+		}
+	}

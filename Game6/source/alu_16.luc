@@ -1,0 +1,68 @@
+module alu_16 (
+    input a[16],         // input 1
+    input b[16],         // input 2
+    input alufn[6],      // alufn signal
+    
+    output out[16],      // output
+    output z[1],         // flags zvn
+    output v[1],
+    output n[1]
+  ) {
+
+  // instantiate modules as parts of alu
+  adder_16 adder;
+  boolean_16 boolean;
+  shifter_16 shifter;
+  compare_16 comparator;
+
+  
+  always {
+    
+    // adder
+    adder.alufn = alufn;
+    adder.a = a;
+    adder.b = b;
+    z = adder.z;
+    v = adder.v;
+    n = adder.n;
+    
+    
+    // comparator
+    comparator.alufn = alufn;
+    comparator.z = adder.z;
+    comparator.v = adder.v;
+    comparator.n = adder.n;
+    
+    // boolean
+    boolean.alufn = alufn;
+    boolean.a = a;
+    boolean.b = b;
+    
+    // shifter
+    shifter.alufn = alufn;
+    shifter.a = a;
+    shifter.b = b[3:0];
+    
+    // mux selecting module using alufn[5:4]
+    case(alufn[5:4]) {
+      b00 :
+          out = adder.out;
+
+      b01 : 
+        out = boolean.out;
+        z = 0;
+        v = 0;
+        n = 0;
+      b10 : 
+        out = shifter.out;
+        z = 0;
+        v = 0;
+        n = 0;
+      b11 : 
+        out = comparator.out;
+      default : out = 16b0;
+    }
+    
+    
+  }
+}

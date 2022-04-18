@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2021.2.1 (64-bit)
+# SW Build 3414424 on Sun Dec 19 10:57:22 MST 2021
+# IP Build 3405791 on Sun Dec 19 15:54:35 MST 2021
+# Start of session at: Mon Apr 18 11:59:33 2022
+# Process ID: 14308
+# Current directory: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.runs/synth_1
+# Command line: vivado.exe -log au_top_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_top_0.tcl
+# Log file: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.runs/synth_1/au_top_0.vds
+# Journal file: C:/Users/cassi/Workspace/repostorage/toying_with_fpga/Game6/work/vivado/Game6/Game6.runs/synth_1\vivado.jou
+# Running On: KC-LAPTOP, OS: Windows, CPU Frequency: 2304 MHz, CPU Physical cores: 4, Host memory: 16922 MB
+#-----------------------------------------------------------
+source au_top_0.tcl -notrace

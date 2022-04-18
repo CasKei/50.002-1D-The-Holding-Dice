@@ -1,0 +1,92 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.2.1 (win64) Build 3414424 Sun Dec 19 10:57:22 MST 2021
+| Date         : Sat Apr 16 18:19:41 2022
+| Host         : KC-LAPTOP running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file au_top_0_control_sets_placed.rpt
+| Design       : au_top_0
+| Device       : xc7a35t
+--------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    14 |
+|    Minimum number of control sets                        |    14 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    39 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    14 |
+| >= 0 to < 4        |     0 |
+| >= 4 to < 6        |     0 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |     4 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |     9 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              18 |           13 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              30 |           10 |
+| Yes          | No                    | No                     |              21 |            9 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             236 |           76 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------+---------------------------------------+------------------------------------+------------------+----------------+--------------+
+|  Clock Signal  |             Enable Signal             |          Set/Reset Signal          | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------+---------------------------------------+------------------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG | game/M_st_p1acc_d                     | resetbutton_IBUF                   |                4 |              8 |         2.00 |
+|  clk_IBUF_BUFG | game/M_st_p1curr_d                    | resetbutton_IBUF                   |                6 |              8 |         1.33 |
+|  clk_IBUF_BUFG | game/M_st_p2curr_d                    | resetbutton_IBUF                   |                6 |              8 |         1.33 |
+|  clk_IBUF_BUFG | game/M_st_p2acc_d                     | resetbutton_IBUF                   |                4 |              8 |         2.00 |
+|  clk_IBUF_BUFG | game/diceroll/edge_rng/M_last_q_reg_0 | resetbutton_IBUF                   |                7 |             11 |         1.57 |
+|  clk_IBUF_BUFG | game/FSM_onehot_M_game_q[16]_i_1_n_0  | resetbutton_IBUF                   |                9 |             17 |         1.89 |
+|  clk_IBUF_BUFG |                                       |                                    |               13 |             18 |         1.38 |
+|  clk_IBUF_BUFG | game/p1roll/sel                       | game/p1roll/sync/clear             |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG | game/p2hold/M_ctr_q_reg[13]_0         | game/p2hold/sync/M_pipe_q_reg[1]_0 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG | game/p2roll/M_ctr_q_reg[13]_0         | game/p2roll/sync/M_pipe_q_reg[1]_0 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG | game/p1hold/M_ctr_q_reg[13]_0         | game/p1hold/sync/M_pipe_q_reg[1]_0 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG | game/diceroll/edge_rng/M_last_q_reg_0 |                                    |                9 |             21 |         2.33 |
+|  clk_IBUF_BUFG |                                       | resetbutton_IBUF                   |               10 |             30 |         3.00 |
+|  clk_IBUF_BUFG | game/diceroll/slowerclock/E[0]        | resetbutton_IBUF                   |               20 |             96 |         4.80 |
++----------------+---------------------------------------+------------------------------------+------------------+----------------+--------------+
+
+
