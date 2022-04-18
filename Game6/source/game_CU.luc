@@ -23,12 +23,7 @@ module game_CU (
     output we
   ) {
     
-    sig dicer[3];  
-  
-
-  
-    
-  
+    sig dicer[3];
   
   // instantiate fsm
   fsm game (.clk(clk), .rst(rst)) = {
@@ -54,7 +49,7 @@ module game_CU (
   };
   
   always {
-    
+    // defaults
     alufn = b111111;
     asel = 0;
     bsel = 0;
@@ -63,33 +58,12 @@ module game_CU (
     read_a = 0;
     read_b = 0;
     we = 0;
-    
-   
-    
+
     // fsm
     case(game.q) {
-      
+   
       // IDLE
       game.IDLE:
-        // fixed outputs: playerturn 0, p1curr, p1acc, p2curr, p2acc
-        // all init values are 0, so outputs here shld be all 0
-        //playerturn = st_turn.q; // 0 is player 1 turn
-        //p1curr     = st_p1curr.q;
-        //p1acc      = st_p1acc.q;
-        //p2curr     = st_p2curr.q;
-        //p2acc      = st_p2acc.q;
-        //currdice = st_currdice.q;
-        
-        //if (det_p1roll.out || det_p1hold.out) {
-          // use this to start game to P1_TURN
-          // basically press any button to initiate game
-        //  game.d = game.P1_TURN;
-        //} else if (det_p2roll.out || det_p2hold.out) {
-        //  game.d = game.P2_TURN;
-        //} else {
-        //  game.d = game.IDLE;
-        //}
-        
         alufn = b111111;
         asel = 0;
         bsel = 0;
@@ -108,7 +82,6 @@ module game_CU (
         } else {
           game.d = game.IDLE;
         }
-        
         
       // P1_TURN (P1 can choose roll or hold, else stay in state)
       // if roll: run dice, store dice.out in st_currdice and show
@@ -131,6 +104,7 @@ module game_CU (
         } else {
           game.d = game.P1_TURN;
         }
+        
       // P2_TURN (P2 can choose roll or hold, else stay in state)
       // if roll: run dice, store dice.out in st_currdice and show
       // if hold: move to UPDATEP2ACC
@@ -153,7 +127,6 @@ module game_CU (
           game.d = game.P2_TURN;
         }
       
-      
       // P1_ROLL (P1 has rolled and currdice is stored and displayed)
       // if 1: move to RESET_P1CURR. other: move to UPDATEP1CURR
       game.P1_ROLL:
@@ -171,7 +144,7 @@ module game_CU (
         if (diceres == 1) {
           game.d = game.RESET_P1CURR;
         } else if (diceres == 0 || diceres == 7){
-          // this is an error, but catch and restart game
+          // reroll
           game.d = game.P1_ROLL;
         } else if (diceres == 2||diceres == 3||diceres == 4||diceres == 5||diceres == 6){
           // rolled 2 to 6
@@ -180,7 +153,6 @@ module game_CU (
           // final catch
           game.d = game.IDLE;
         }
-      
       
       // P2_ROLL (P2 has rolled and currdice is stored and displayed)
       // if 1: move to RESET_P2CURR. other: move to UPDATEP2CURR
@@ -199,7 +171,7 @@ module game_CU (
         if (diceres == 1) {
           game.d = game.RESET_P2CURR;
         } else if (diceres == 0 || diceres == 7){
-          // this is an error, but catch and restart game
+          // reroll
           game.d = game.P2_ROLL;
         } else if (diceres == 2||diceres == 3||diceres == 4||diceres == 5||diceres == 6){
           // rolled 2 to 6
@@ -208,7 +180,6 @@ module game_CU (
           // final catch
           game.d = game.IDLE;
         }
-      
       
       // UPDATEP1CURR (P1 has rolled and currdice is 2 to 6)
       // P1CURR = oldP1CURR + CURRDICE
@@ -223,10 +194,8 @@ module game_CU (
         read_b = b0100;
         we = 1;
         
-        
         // move back to P1_TURN
         game.d = game.P1_TURN;
-      
       
       // UPDATEP2CURR (P2 has rolled and currdice is 2 to 6)
       // P2CURR = oldP2CURR + CURRDICE
@@ -243,7 +212,6 @@ module game_CU (
         
         // move back to P2_TURN
         game.d = game.P2_TURN;
-      
       
       // RESET_P1CURR
       // P1CURR = P1CURR * ZERO
@@ -262,7 +230,6 @@ module game_CU (
         // move to P2_TURN
         game.d = game.P2_TURN;
       
-      
       // RESET_P2CURR
       // P2CURR = P2CURR * ZERO
       // move to P1_TURN
@@ -279,7 +246,6 @@ module game_CU (
         // move to P1_TURN
         game.d = game.P1_TURN;
       
-      
       // UPDATEP1ACC (player chose to hold)
       // P1ACC = P1ACC + P1CURR
       // move to check if new P1ACC can win (CHKP150)
@@ -293,10 +259,8 @@ module game_CU (
         read_b = b0001;
         we = 1;
         
-        
         // move to check if new P1ACC can win (CHKP150)
         game.d = game.CHKP150;
-      
       
       // UPDATEP2ACC (player chose to hold)
       // P2ACC = P2ACC + P2CURR
@@ -311,12 +275,8 @@ module game_CU (
         read_b = b0011;
         we = 1;
       
-        
         // move to check if new P2ACC can win (CHKP250)
         game.d = game.CHKP250;
-      
-
-      
       
       // CHKP150 (p1acc is updated, check if >= 50)
       // win = CMPLE( 50 , st_p1acc.q)
@@ -343,13 +303,11 @@ module game_CU (
         read_b = b0111;
         we = 1;
 
-        
         if (haswinner == 0) {
           game.d = game.P2_TURN;
         } else {
           game.d = game.P1WIN;
         }
-      
       
       // CHKP250 (p1acc is updated, check if >= 50)
       // win = CMPLE( 50 , st_p2acc.q)
@@ -366,9 +324,6 @@ module game_CU (
         
         game.d = game.BRANCHP2CHECK;
         
-        
-        
-        
       game.BRANCHP2CHECK:
         alufn = b001000;
         asel = 0;
@@ -379,14 +334,11 @@ module game_CU (
         read_b = b0111;
         we = 1;
         
-        
         if (haswinner == 0) {
           game.d = game.P1_TURN;
         } else {
           game.d = game.P2WIN;
         }
-      
-        
       
       // P1WIN (st_win = 1, p1acc >= 50) freeze outputs and stop
       game.P1WIN:
@@ -400,7 +352,6 @@ module game_CU (
         we = 1;
                 
         game.d = game.P1WIN; // stay here
-      
       
       // P2WIN (st_win = 1, p2acc >= 50) freeze outputs and stop
       game.P2WIN:
